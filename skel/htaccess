@@ -1,0 +1,39 @@
+# .htaccess file for eldepot sample medick application
+# $Id: default.htaccess 379 2006-03-18 17:36:03Z aurelian $
+
+# Configuration
+
+# 1. Apache Section.
+DirectoryIndex index.html index.php
+
+# 2. PHP Options.
+# this options will not work for php as cgi
+# and it will be removed in version 0.2
+# HINT: move this one to PHPTemplateView class
+php_value short_open_tag 1
+# this should depend on environment.
+# while we are on "planning", we will 
+# keep this to 1
+php_value display_errors 1
+
+# 4. Rewrite
+RewriteEngine on
+
+# Set 1.
+#RewriteCond %{REQUEST_FILENAME} !-s
+#RewriteCond %{REQUEST_URI} !^index.php/$
+#RewriteRule   ^([^i][^n][^d][^e][^x].*)$  index.php/$1/ [NS,L]
+
+# Set 2.
+RewriteBase /medick2
+
+# Send requests without parameters to index.php
+# -- disabled since we want to show index.html
+# -- default index page for medick.
+#RewriteRule ^$ index.php  [L]
+# Send requests for files that exist to those files.
+RewriteCond %{REQUEST_FILENAME} !-f
+# Send requests for directories that exist to those directories.
+RewriteCond %{REQUEST_FILENAME} !-d
+# Send requests to index.php, appending the query string part.
+RewriteRule (.*) index.php/$1  [QSA,L]

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<application name="cfields">
+
+  <properties>
+    <property name="web.session" value="true" />
+    <property name="plugin.autodiscovery" value="true" />
+    <!-- 
+      change the path to plugins here. complete path with / at the end
+      <property name="plugin.path"          value="vendor/plugins/" />
+    -->
+  </properties>
+
+  <!-- XXX: not used, and it will be read only if plugin.autodiscovery= false -->
+  <plugins>
+    <plugin name="foo" path="" />
+    <plugin name="bar" path="" />
+  </plugins>
+  
+  <!-- umm, the default routes -->
+  <routes>
+    <!-- / => foo/bar -->
+    <route name="__root"    value="/">
+      <default name="controller" value="foo" />
+      <default name="action"     value="bar" />
+    </route>
+    <!-- /* => /:controller/:action/:id -->
+    <route name="__default" value=":controller/:action/:id" />
+  </routes>
+
+  <!-- environment specific settings -->
+  <environments>
+    <environment name="localhost">
+      <properties>
+        <property name="base" value="medick2" />
+      </properties>
+      <logger>
+        <formatter>default</formatter>
+        <outputters>
+          <!-- <outputter name="stdout" level="0" /> -->
+          <outputter name="file" level="0">
+            <property name="path" value="/W/Devel/medick/exp/medick2/log/localhost.log" />
+          </outputter>
+        </outputters>
+      </logger> <!-- /logger -->
+    </environment>
+
+    <environment name="test">
+      <logger>
+        <formatter>default</formatter>
+        <outputters>
+          <outputter name="stdout" level="0" />
+          <!-- <outputter name="file" level="0">
+            <property name="path" value="/home/aurelian/Code/medick/exp/medick2/log/test.log" />
+          </outputter>-->
+        </outputters>
+      </logger> <!-- /logger -->
+    </environment> <!-- / test env. -->
+  </environments>
+
+</application>
