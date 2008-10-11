@@ -1,0 +1,51 @@
+h2. Style
+
+* no more get/set: use a public property if needed!
+* no camelCase but under_score
+
+h2. Definitions
+  
+  MEDICK_PATH -> path to Medick Framework.
+  APP_PATH    -> path to boot.php file
+
+h2. Importance of ContextManager
+
+
+
+h2. TODOs
+  Move $uri/$method to Request class (25.04)
+  Rename ContextManager to Context (25.04)
+
+h2. DONE
+  Create a Context Object with config and logger, inject this one then (25.03 - 25.04)
+
+h2. Structure
+
+APP_PATH
+  boot.php
+  app/
+  config/
+  log/
+  tmp/
+  script/
+  vendor/medick ( MEDICK_PATH )
+  vendor/plugins
+
+h2. Medick Initialization (TBD-> review)
+
+  index.php 
+  | boot.php
+  |   Medick.prepare_application()
+  |     error_handler
+  |     load_frameworks
+  |       context
+  |       logger
+  |       plugins
+  |       action_controller
+  | $d= new Dispatcher ( IConfigurator )
+  |   setup_logger
+  |   load_plugins
+  |
+  | $d->dispatch()
+  |   route_recognision
+

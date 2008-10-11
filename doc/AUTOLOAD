@@ -1,0 +1,46 @@
+h2. Autoload
+
+h3. About
+
+* Mecanism nou de "incarcare" a claselor in Medick 2.
+* Se realizeaza prin divizarea Medick in framework-uri.
+* Fiecare Framework contine un fisier init.php prin care se adauga o functie __autoload pentru descoperirea automata a claselor necesare.
+
+h3. Exemple:
+
+context/init.php
+
+function __context_autoload($class) {
+  $file= 'context'.DIRECTORY_SEPARATOR.$class.'.php';
+  if(is_file( dirname(__FILE__) . DIRECTORY_SEPARATOR . $class . '.php' )) {
+    return require $file;
+  }
+}
+
+spl_autoload_register('__context_autoload');
+
+h3. Core Details
+
+h4. include_path:
+
+* vendor/medick/lib
+
+h4. loading a framework
+
+Medick::load_framework('foo_bar');
+
+loads: MEDICK_PATH/lib/foo/bar/init.php
+
+h4. core classes:
+
+* medick/Object.php
+* medick/Medick.php
+* medick/ErrorHandler.php
+
+h4. frameworks:
+* context
+* logger
+* plugin
+* action_controller
+* action_view
+

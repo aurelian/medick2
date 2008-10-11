@@ -1,0 +1,44 @@
+h2. Plugins
+
+h3. About
+
+* A plugin is a new API to add new functionalities to medick applications
+* Allow access to Medick Framework core components
+* Enhance existing applications
+
+h3. Plugin Framework
+
+* A plugin is a folder with php files and other resources located in:
+  -> vendor/plugins
+  -> user specified location in config.xml file
+
+* Eg. Foo is a Medick plugin if the folder foo exists and in has a init.php file on it.
+
+h3. init.php file
+
+* declare plugin load (include) path
+* one can use a init.php similar to ones provided by medick frameworks
+* one can use and alter include_path settings
+* one can require/include all the files
+* $context is available in init.php
+
+h3. Options
+
+* By default Medick loads all the plugins from declared locations.
+* The load order is not guaranteed
+* "Auto-discovery" can be turned off in config.xml
+* Load order can be altered in config.xml
+
+h3. API
+
+* defined in Plugin Framework IPlugin interface
+* Plugin Framework is loaded after the Logger Framework
+* Plugin Framework is initialized and configured in Dispatcher after the logger is up
+
+inheritance:
+
+(interface)IPlugin < (abstract_class)TYPE_1_Plugin < USER_Plugin
+                   < (abstract_class)TYPE_2_Plugin < USER_Plugin
+
+
+
