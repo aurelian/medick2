@@ -1,19 +1,17 @@
-<?php
-//
-// $Id: boot.php 452 2007-08-15 08:06:49Z aurelian $
-//
-
 /**
+ *
  * It boots a medick application
  *
  * @package medick.core
  */
 
-define( 'APP_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR );
+// application path
+define( 'APP_PATH', '<?=$app_real_path;?>' );
 
 // medick framework path.
-define( 'MEDICK_PATH', join( DIRECTORY_SEPARATOR, 
-                             array(dirname(__FILE__), 'vendor', 'medick')));
+define('MEDICK_PATH', file_exists(join(DIRECTORY_SEPARATOR, array('<?=$app_real_path;?>', 'vendor', 'medick', 'lib', 'core', 'Medick.php')))? join(DIRECTORY_SEPARATOR, array('<?=$app_real_path;?>', 'vendor', 'medick')): '<?=$medick_path;?>');
+// if not frozen:
+// define('MEDICK_PATH', '<?=$medick_path;?>');
 
 // rewrite system include path
 set_include_path( MEDICK_PATH . DIRECTORY_SEPARATOR . 'lib'   . DIRECTORY_SEPARATOR );
@@ -21,12 +19,7 @@ set_include_path( MEDICK_PATH . DIRECTORY_SEPARATOR . 'lib'   . DIRECTORY_SEPARA
 // this should depend on environment
 error_reporting( E_ALL | E_STRICT | E_RECOVERABLE_ERROR );
 
-// php 5.1 strict sdandards.
-if (version_compare(PHP_VERSION, '5.1.0') > 0) {
-    date_default_timezone_set('Europe/Madrid');
-}
-
-// load core
+// load core, will setup error_handler and will load other core objects
 require 'medick/Medick.php';
 
 Medick::prepare_application();

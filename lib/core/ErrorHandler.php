@@ -21,30 +21,29 @@ class Error extends Exception {
  */
 class ErrorHandler extends Object {
 
-    /**
-     * Setup this ErrorHandler
-     */
-    public function __construct() {
-        ini_set('docref_root', null);
-        ini_set('docref_ext', null);
-    }
+  /**
+   * Setup this ErrorHandler
+   */
+  public function __construct() {
+    ini_set('docref_root', null);
+    ini_set('docref_ext', null);
+  }
 
-    /**
-     * Raise An Error
-     * 
-     * @param int errno
-     * @param string errstr
-     * @param string errfile
-     * @param int errline
-     * @throws Error
-     */
-    function raiseError($errno, $errstr, $errfile, $errline) {
-        $errRep = error_reporting();
-        if( ($errno & $errRep) != $errno) {
-            return;
-        }
-        $trace = debug_backtrace();
-        array_shift($trace);
-        throw new Error( $errstr, $errno, $errfile, $errline, $trace );
-    }
+  /**
+   * Raise An Error
+   * 
+   * @param int errno
+   * @param string errstr
+   * @param string errfile
+   * @param int errline
+   * @throws Error
+   */
+  function raiseError($errno, $errstr, $errfile, $errline) {
+    $errRep = error_reporting();
+    if(($errno & $errRep) != $errno) return;
+
+    $trace = debug_backtrace();
+    array_shift($trace);
+    throw new Error( $errstr, $errno, $errfile, $errline, $trace );
+  }
 }
