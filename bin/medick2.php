@@ -42,10 +42,12 @@ function create_file($path, $file, $target, Array $vars= array()) {
 
   $contents= $header . $c;
   
-  if( md5($contents) == $hash )
+  if( md5($contents) == $hash ) {
     p('identical', $to_file);
-  else
+  } else {
     file_put_contents( $to_file, $contents );
+    p('created', $to_file);
+  }
 
 }
 
@@ -79,6 +81,9 @@ function generate_application( $app_path ) {
     array('app_name' => $app_name));
   create_file( $app_real_path, 'index.php', make_path('public', 'index.php'), 
     array('app_name' => $app_name, 'app_real_path' => $app_real_path));
+
+  touch( make_path($app_real_path, 'log', 'localhost.log') );
+  chmod( make_path($app_real_path, 'log', 'localhost.log'), 0777 );
 
   exit();
 }
