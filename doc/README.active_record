@@ -1,0 +1,42 @@
+// $Id: README 460 2007-08-28 14:29:29Z aurelian $
+
+This is an experiment to create a faster / better and feature rich ActiveRecord
+It will also replace Creole from Medick.
+
+This Medick experiment is licensed under BSD Licence, see LICENSE for details.
+
+Done:
+  -> removed Creole
+  -> SQLConnection -> database connection class
+  -> SQLTableInfo -> metadata for database tables
+  -> SQLResultSet -> fetch data from database
+  -> SQLPreparedStatement -> executes prepared statements on the database
+  -> SQLRecordsIterator -> returns collections of ActiveRecord objects
+  -> SQLite (v.2) driver
+  -> SQLField -> a field from a table
+  -> SQLCommand -> builds SQL Commands
+  -> SQLBuilder -> builds SQLCommands from array
+  -> ActiveRecord: configurations from IConfigurator
+  -> ActiveRecord: base insert/update/save
+  -> ActiveRecord: base find
+
+Todo:
+  -> port Logger
+  -> add MTimer to logs
+  -> SQL Limit/Offset
+  -> ActiveRecord: advanced find(see SQLBuilder comments)
+  -> ActiveRecord: filters
+  -> ActiveRecord: validators
+  -> ActiveRecord: find with array --> User::find( array(1,2,3,4), $clauses, $bindings )
+  -> SQL Transactions
+  -> Driver: MySQL
+  -> Driver: MySQLi
+  -> Driver: PostgreSQL
+  -> Driver: PDOSQLite (v.3)
+
+Unit Tests:
+  -> setup simpletest, a runner
+  -> setup mocks for accessing data
+  -> test1. sqlbuilder with mock-sql
+  -> active record tests.
+
